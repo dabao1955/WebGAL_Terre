@@ -13,6 +13,14 @@ on:
       - synchronize
 
 jobs:
+
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/'))
+    steps:
+      - run: echo  ${{ github.ref }}
+      
   build-linux:
     name: Build Linux Binary
     runs-on: ubuntu-latest
